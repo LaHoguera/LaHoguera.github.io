@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Hoguera</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" >La Hoguera</a>
+       
+    </nav>
+
+    <div id="SecPedir" class="container mt-2">
+        <div id="Cuenta" class="row">
+            <!-- Nombre y dir -->
+            <div class="col-12">
+                <div class="card mb-2">
+                    <div class="card-body row">
+                        <h5 class=" col-12">Obligatorio</h5>
+                        <div class="col-6"><input type="text" placeholder="Nombre" name="Nombre" id="NombreCliente" class="w-100"></div>
+                        <div class="col-6"><input type="text" placeholder="Direccion" name="Direccion" id="DireccionCliente" class="w-100"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Cuenta -->
+            <div class="col-12">
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h3 class="card-title">Total a pagar: <span id="totalPagar">0</span> $</h3>
+                        <p class="card-text">Precio por Almohada: <span id="precioAlmohada">4000</span> $</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MENU -->
+            <div class="col-12">
+                <div class="card text-center">
+                    <div class="card-body align-middle container">
+                        <h5 class="card-title">MENU</h5>
+
+                        <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
+                            <div class="col-7 d-flex align-items-center">
+                                <p class="card-text h-100 text-left">Almohada de queso y jamon</p>
+                            </div>
+                            <div class="col-4 d-flex align-items-center">
+                                <button class="btn btn-danger" type="button" onclick="decrement('CantJamoQueso')">-</button>
+                                <p id="CantJamoQueso" style="margin-top: 15px; padding: 8px;">0</p>
+                                <button class="btn btn-success" type="button" onclick="increment('CantJamoQueso')">+</button>
+                            </div>
+                        </div>
+
+                        <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
+                            <div class="col-7 d-flex align-items-center">
+                                <p class="card-text h-100 text-left">Almohada de queso, jamon y salsa napolitana</p>
+                            </div>
+                            <div class="col-4 d-flex align-items-center">
+                                <button class="btn btn-danger" type="button" onclick="decrement('CantPizzaMargarita')">-</button>
+                                <p id="CantPizzaMargarita" style="margin-top: 15px; padding: 8px;">0</p>
+                                <button class="btn btn-success" type="button" onclick="increment('CantPizzaMargarita')">+</button>
+                            </div>
+                        </div>
+
+                        <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
+                            <div class="col-7 d-flex align-items-center">
+                                <p class="card-text h-100 text-left">Almohada de queso y Salchicha Ahumada</p>
+                            </div>
+                            <div class="col-4 d-flex align-items-center">
+                                <button class="btn btn-danger" type="button" onclick="decrement('CantSalChiAuma')">-</button>
+                                <p id="CantSalChiAuma" style="margin-top: 15px; padding: 8px;">0</p>
+                                <button class="btn btn-success" type="button" onclick="increment('CantSalChiAuma')">+</button>
+                            </div>
+                        </div>
+
+                        <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
+                            <div class="col-7 d-flex align-items-center">
+                                <p class="card-text h-100 text-left">Almohada de queso y champiñones</p>
+                            </div>
+                            <div class="col-4 d-flex align-items-center">
+                                <button class="btn btn-danger" type="button" onclick="decrement('CantChamp')">-</button>
+                                <p id="CantChamp" style="margin-top: 15px; padding: 8px;">0</p>
+                                <button class="btn btn-success" type="button" onclick="increment('CantChamp')">+</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success" type="button" onclick="hacerPedido()">Pedir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript para incrementar y decrementar cantidades -->
+    <script>
+          
+
+
+
+        let precio = 4000;  // Puedes cambiar este valor fácilmente
+
+        function increment(id) {
+            let element = document.getElementById(id);
+            let value = parseInt(element.textContent);
+            element.textContent = value + 1;
+            calcularTotal();
+        }
+
+        function decrement(id) {
+            let element = document.getElementById(id);
+            let value = parseInt(element.textContent);
+            if (value > 0) {
+                element.textContent = value - 1;
+                calcularTotal();
+            }
+        }
+
+        function calcularTotal() {
+            let CantJamoQueso = parseInt(document.getElementById('CantJamoQueso').textContent);
+            let CantPizzaMargarita = parseInt(document.getElementById('CantPizzaMargarita').textContent);
+            let CantSalChiAuma = parseInt(document.getElementById('CantSalChiAuma').textContent);
+            let CantChamp = parseInt(document.getElementById('CantChamp').textContent);
+
+            let total = (CantJamoQueso + CantPizzaMargarita + CantSalChiAuma + CantChamp) * precio;
+            document.getElementById('totalPagar').textContent = total;
+        }
+
+        function hacerPedido() {
+            let nombre = document.getElementById('NombreCliente').value;
+            let direccion = document.getElementById('DireccionCliente').value;
+            let CantJamoQueso = parseInt(document.getElementById('CantJamoQueso').textContent);
+            let CantPizzaMargarita = parseInt(document.getElementById('CantPizzaMargarita').textContent);
+            let CantSalChiAuma = parseInt(document.getElementById('CantSalChiAuma').textContent);
+            let CantChamp = parseInt(document.getElementById('CantChamp').textContent);
+
+            if (!nombre || !direccion) {
+                alert('Por favor, complete los campos obligatorios.');
+                return;
+            }
+
+            if (CantJamoQueso === 0 && CantPizzaMargarita === 0 && CantSalChiAuma === 0 && CantChamp === 0) {
+                alert('Por favor, agregue al menos un pastel.');
+                return;
+            }
+
+            let mensaje = `Hola Soy ${nombre}   \nDireccion: -------- ${direccion}\n\nQuisiera ordenar:\n\n`;
+            if (CantJamoQueso > 0) mensaje += `-Almohada de queso y jamon: ${CantJamoQueso}\n`;
+            if (CantPizzaMargarita > 0) mensaje += `-Almohada de queso, jamon y salsa napolitana: ${CantPizzaMargarita}\n`;
+            if (CantSalChiAuma > 0) mensaje += `-Almohada de queso y Salchicha Ahumada: ${CantSalChiAuma}\n`;
+            if (CantChamp > 0) mensaje += `-Almohada de queso y champiñones: ${CantChamp}\n`;
+
+            let totalPagar = parseInt(document.getElementById('totalPagar').textContent);
+            let totalConDomicilio = totalPagar + 4000;
+
+            mensaje += `\nSé que debo cancelar ${totalPagar} $ + 4000 $ del domicilio\n\n--- TOTAL A PAGAR: ${totalConDomicilio} $ ---`;
+
+            let whatsappUrl = `https://wa.me/+573508182960?text=${encodeURIComponent(mensaje)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('precioAlmohada').textContent = precio;
+        });
+        
+    </script>
+</body>
+</html>
