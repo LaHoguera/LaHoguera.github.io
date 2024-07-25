@@ -10,7 +10,6 @@
 <body class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" >La Hoguera</a>
-       
     </nav>
 
     <div id="SecPedir" class="container mt-2">
@@ -19,7 +18,7 @@
             <div class="col-12">
                 <div class="card mb-2">
                     <div class="card-body row">
-                        <h5 class=" col-12">Obligatorio</h5>
+                        <h5 class="col-12">Obligatorio</h5>
                         <div class="col-6"><input type="text" placeholder="Nombre" name="Nombre" id="NombreCliente" class="w-100"></div>
                         <div class="col-6"><input type="text" placeholder="Direccion" name="Direccion" id="DireccionCliente" class="w-100"></div>
                     </div>
@@ -40,7 +39,8 @@
                 <div class="card text-center">
                     <div class="card-body align-middle container">
                         <h5 class="card-title">MENU</h5>
-<!-- 
+
+                        <!-- 
                         <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
                             <div class="col-7 d-flex align-items-center">
                                 <p class="card-text h-100 text-left">Almohada de queso y jamon</p>
@@ -51,7 +51,8 @@
                                 <button class="btn btn-success" type="button" onclick="increment('CantJamoQueso')">+</button>
                             </div>
                         </div>
--->
+                        -->
+
                         <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
                             <div class="col-7 d-flex align-items-center">
                                 <p class="card-text h-100 text-left">Almohada de queso, jamon y salsa napolitana</p>
@@ -62,8 +63,8 @@
                                 <button class="btn btn-success" type="button" onclick="increment('CantPizzaMargarita')">+</button>
                             </div>
                         </div>
-<!-- 
 
+                        <!-- 
                         <div class="row d-flex align-items-center" style="margin-bottom: 20px;">
                             <div class="col-7 d-flex align-items-center">
                                 <p class="card-text h-100 text-left">Almohada de queso y Salchicha Ahumada</p>
@@ -85,7 +86,7 @@
                                 <button class="btn btn-success" type="button" onclick="increment('CantChamp')">+</button>
                             </div>
                         </div>
--->
+                        -->
 
                         <button class="btn btn-success" type="button" onclick="hacerPedido()">Pedir</button>
                     </div>
@@ -101,10 +102,6 @@
 
     <!-- JavaScript para incrementar y decrementar cantidades -->
     <script>
-          
-
-
-
         let precio = 4000;  // Puedes cambiar este valor fácilmente
 
         function increment(id) {
@@ -124,10 +121,10 @@
         }
 
         function calcularTotal() {
-            let CantJamoQueso = parseInt(document.getElementById('CantJamoQueso').textContent);
-            let CantPizzaMargarita = parseInt(document.getElementById('CantPizzaMargarita').textContent);
-            let CantSalChiAuma = parseInt(document.getElementById('CantSalChiAuma').textContent);
-            let CantChamp = parseInt(document.getElementById('CantChamp').textContent);
+            let CantJamoQueso = document.getElementById('CantJamoQueso') ? parseInt(document.getElementById('CantJamoQueso').textContent) : 0;
+            let CantPizzaMargarita = document.getElementById('CantPizzaMargarita') ? parseInt(document.getElementById('CantPizzaMargarita').textContent) : 0;
+            let CantSalChiAuma = document.getElementById('CantSalChiAuma') ? parseInt(document.getElementById('CantSalChiAuma').textContent) : 0;
+            let CantChamp = document.getElementById('CantChamp') ? parseInt(document.getElementById('CantChamp').textContent) : 0;
 
             let total = (CantJamoQueso + CantPizzaMargarita + CantSalChiAuma + CantChamp) * precio;
             document.getElementById('totalPagar').textContent = total;
@@ -136,10 +133,10 @@
         function hacerPedido() {
             let nombre = document.getElementById('NombreCliente').value;
             let direccion = document.getElementById('DireccionCliente').value;
-            let CantJamoQueso = parseInt(document.getElementById('CantJamoQueso').textContent);
-            let CantPizzaMargarita = parseInt(document.getElementById('CantPizzaMargarita').textContent);
-            let CantSalChiAuma = parseInt(document.getElementById('CantSalChiAuma').textContent);
-            let CantChamp = parseInt(document.getElementById('CantChamp').textContent);
+            let CantJamoQueso = document.getElementById('CantJamoQueso') ? parseInt(document.getElementById('CantJamoQueso').textContent) : 0;
+            let CantPizzaMargarita = document.getElementById('CantPizzaMargarita') ? parseInt(document.getElementById('CantPizzaMargarita').textContent) : 0;
+            let CantSalChiAuma = document.getElementById('CantSalChiAuma') ? parseInt(document.getElementById('CantSalChiAuma').textContent) : 0;
+            let CantChamp = document.getElementById('CantChamp') ? parseInt(document.getElementById('CantChamp').textContent) : 0;
 
             if (!nombre || !direccion) {
                 alert('Por favor, complete los campos obligatorios.');
@@ -151,7 +148,7 @@
                 return;
             }
 
-            let mensaje = `Hola Soy ${nombre}   \nDireccion: -------- ${direccion}\n\nQuisiera ordenar:\n\n`;
+            let mensaje = `Hola Soy ${nombre} \nDireccion: -------- ${direccion}\n\nQuisiera ordenar:\n\n`;
             if (CantJamoQueso > 0) mensaje += `-Almohada de queso y jamon: ${CantJamoQueso}\n`;
             if (CantPizzaMargarita > 0) mensaje += `-Almohada de queso, jamon y salsa napolitana: ${CantPizzaMargarita}\n`;
             if (CantSalChiAuma > 0) mensaje += `-Almohada de queso y Salchicha Ahumada: ${CantSalChiAuma}\n`;
@@ -169,7 +166,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('precioAlmohada').textContent = precio;
         });
-        
     </script>
 </body>
 </html>
